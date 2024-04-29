@@ -7,8 +7,10 @@ import {
   useRef,
   forwardRef,
   useImperativeHandle,
+  useContext,
 } from "react";
 import { Brother } from "./models";
+import { useCurrentUser } from "./App";
 
 interface PersonProps {
   name: string;
@@ -113,8 +115,11 @@ const Person = (props: PersonProps) => {
 
   const [isLoading, load] = useLoading();
 
+  const currentUser = useCurrentUser();
+
   return (
     <div>
+      <p>Name: {currentUser.username}.</p>
       <h1 ref={divRef}>{props.name}</h1>
       <h2>{props.age}</h2>
       <button onClick={() => clickHandler(setCount)}>Click me</button>
@@ -147,7 +152,7 @@ const Countdown = forwardRef<CountdownHandle, CountdownProps>((props, ref) => {
   useImperativeHandle(ref, () => ({
     // start() has type inference here
     start() {
-      alert("Start");
+      console.log("start");
     },
   }));
 

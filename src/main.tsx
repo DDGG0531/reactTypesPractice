@@ -17,3 +17,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <App />
   </React.StrictMode>
 );
+
+// 這邊就很適合上傳sentry
+// 因為errorBoundary指會捕捉dom的錯誤，click event未必會造成dom出錯，例如直接噴error
+window.addEventListener("error", (event) => {
+  // Handle global error  console.error('Global Error:', event.error);
+  console.error("Global Error:", event.error);
+});
